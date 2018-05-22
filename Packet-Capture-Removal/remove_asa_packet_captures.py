@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import paramiko, sys, time
+import paramiko, sys, time, email_report
 
 from asa_config import ip_blocks, device_username, device_pass
 
@@ -67,6 +67,19 @@ def format_check(remote_connection, ssh_shell, capture_output, ip):
     remote_connection.close()
 
 
+def email_report_dnr():
+    email_message = ("The packet capture removal script has been successfully run which has resulted in %s captures being removed.\n") % (str(len(captures_removed)))
+    email_message += ("There are %s captures that contain dnr or DNR within their name and therefore have not been removed.\n") % (str(len(dnr_captures)))
+    email_message += ("The following captures were excluded for this reason: \n")
+    email_message += ('\n')
+    for i in range(len(dnr_capture_devices)):
+        email_message += str(dnr_capture_devices[i]) + ":\n"
+        email_message += str(dnr_captures[i]) + "\n"
+        email_message += ('\n')
+    email_message += ('If any of these captures are no longer required could you please ensure that they are removed from the devices.')
+    email_report.send_email_for_captures(email_message)
+
+
 def main():
     with open("Capture_removal.log", "a") as log_file:
         for ip_counter in range(len(ip_block_1)):
@@ -93,6 +106,7 @@ def main():
             except Exception as e:
                 log_file.write(str(e))
                 pass
+        email_repor_dnr()
 
 
 if __name__ == "__main__":
