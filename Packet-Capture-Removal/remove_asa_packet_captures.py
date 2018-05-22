@@ -72,18 +72,24 @@ def main():
         for ip_counter in range(len(ip_block_1)):
             try:
                 each_ip = ip_block_1[ip_counter]
+                print("Connecting to " + each_ip)
+                connect(each_ip)
             except Exception as e:
                 log_file.write(str(e))
                 pass
         for ip_counter in range(len(ip_block_2)):
             try:
                 each_ip = ip_block_2[ip_counter]
+                print("Connecting to " + each_ip)
+                connect(each_ip)
             except Exception as e:
                 log_file.write(str(e))
                 pass
         for ip_counter in range(len(ip_block_3)):
             try:
                 each_ip = ip_block_3[ip_counter]
+                print("Connecting to " + each_ip)
+                connect(each_ip)
             except Exception as e:
                 log_file.write(str(e))
                 pass
