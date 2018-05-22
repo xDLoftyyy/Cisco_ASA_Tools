@@ -10,8 +10,7 @@ dnr_captures = []
 dnr_capture_devices = []
 captures_removed = []
 
-with open(filename, 'w'): pass
-
+with open('Capture_removal.log', 'w'): pass
 
 
 def connect(ip):
@@ -66,3 +65,29 @@ def format_check(remote_connection, ssh_shell, capture_output, ip):
             time.sleep(1)
             print("goes")
     remote_connection.close()
+
+
+def main():
+    with open("Capture_removal.log", "a") as log_file:
+        for ip_counter in range(len(ip_block_1)):
+            try:
+                each_ip = ip_block_1[ip_counter]
+            except Exception as e:
+                log_file.write(str(e))
+                pass
+        for ip_counter in range(len(ip_block_2)):
+            try:
+                each_ip = ip_block_2[ip_counter]
+            except Exception as e:
+                log_file.write(str(e))
+                pass
+        for ip_counter in range(len(ip_block_3)):
+            try:
+                each_ip = ip_block_3[ip_counter]
+            except Exception as e:
+                log_file.write(str(e))
+                pass
+
+
+if __name__ == "__main__":
+    main()
