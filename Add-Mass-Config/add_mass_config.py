@@ -26,7 +26,7 @@ def get_config_lines():
     how_many_config = input("How many lines of config do you wish to add ? >> ")
     for i in range(how_many_config):
         each_line = raw_input("Please provide each line of configuration individually."
-                              " Provide them in the order you wish them to appear starting from the bottom >> ")
+                              " Provide them in the order you wish them to appear starting from the top >> ")
         config_lines.append(each_line)
     return config_lines
 
@@ -35,11 +35,11 @@ def connect(ip, inc_filter_command, change_desc_line, config_lines):
     remote_connection = paramiko.SSHClient()
     remote_connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     remote_connection.connect(
-    ip,
-    username=device_username,
-    password=device_pass,
-    look_for_keys=False,
-    allow_agent=False
+        ip,
+        username=device_username,
+        password=device_pass,
+        look_for_keys=False,
+        allow_agent=False
     )
     check_acl(
     remote_connection, inc_filter_command, change_desc_line, config_lines)
