@@ -25,8 +25,8 @@ def get_config_lines():
     config_lines = []
     how_many_config = input("How many lines of config do you wish to add ? >> ")
     for i in range(how_many_config):
-        each_line = raw_input("Please provide each line pressing return
-        "at the end of each >> ")
+        each_line = raw_input("Please provide each line of configuration individually."
+                              " Provide them in the order you wish them to appear starting from the bottom >> ")
         config_lines.append(each_line)
     return config_lines
 

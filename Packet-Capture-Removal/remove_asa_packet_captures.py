@@ -85,14 +85,14 @@ def email_report_dnr():
             email_message += str(device_with_error[error_count]) + '\n'
         email_message += ('\n')
         email_message += ("Please check Capture_removal.log for more information")
-    email_report.send_email_for_captures(email_message)
+    email_report.send_email_report(email_message)
 
 
 def main():
     with open("Capture_removal.log", "a") as log_file:
         for ip_counter in range(len(ip_block_1)):
+            each_ip = ip_block_1[ip_counter]
             try:
-                each_ip = ip_block_1[ip_counter]
                 print("Connecting to " + each_ip)
                 connect(each_ip)
             except Exception as e:
@@ -100,8 +100,8 @@ def main():
                 device_with_error.append(each_ip)
                 pass
         for ip_counter in range(len(ip_block_2)):
+            each_ip = ip_block_2[ip_counter]
             try:
-                each_ip = ip_block_2[ip_counter]
                 print("Connecting to " + each_ip)
                 connect(each_ip)
             except Exception as e:
@@ -109,15 +109,15 @@ def main():
                 device_with_error.append(each_ip)
                 pass
         for ip_counter in range(len(ip_block_3)):
+            each_ip = ip_block_3[ip_counter]
             try:
-                each_ip = ip_block_3[ip_counter]
                 print("Connecting to " + each_ip)
                 connect(each_ip)
             except Exception as e:
                 log_file.write(str(e))
                 device_with_error.append(each_ip)
                 pass
-        email_repor_dnr()
+        email_report_dnr()
 
 
 if __name__ == "__main__":
