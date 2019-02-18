@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import paramiko, time
+import paramiko, time, email_report
 
 from asa_config import ip_blocks, device_username, device_pass
 
@@ -37,7 +37,7 @@ def search_acl(remote_connection, search_terms):
     shell_output = ssh_shell.recv(10000)
     results = []
     for each_term in search_terms:
-        ssh_shell.send("show access-list | inc %s" % each_term)
+        ssh_shell.send("show access-list | inc %s\n" % each_term)
         time.sleep(1)
         shell_output = ssh_shell.recv(10000)
         output_trimmed = shell_output.split('show access-list | inc %s' % each_term)[1]
@@ -80,8 +80,12 @@ def main():
         file3.write("-----------------------------------------------------")
     file3.close()
     print("Subnet 3 complete\n")
+    email = raw_input("Search Complete would you like the results emailed to you ? y/n >> ")
+    if email == ("y"):
+        email_report.build_message()
 
 
 if __name__ == '__main__':
-    main():
+    main()
+
 

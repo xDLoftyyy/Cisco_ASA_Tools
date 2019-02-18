@@ -13,6 +13,5 @@ def send_email_report(message_body):
     msg['From'] = from_addr
     for to_count in range(len(to_addrs)):
         msg['To'] = to_addrs[to_count]
-        server = smtplib.SMTP (mail_server, 25)
+        server = smtplib.SMTP(mail_server, 25)
         server.sendmail(from_addr, [to_addrs[to_count]], msg.as_string())
-        
